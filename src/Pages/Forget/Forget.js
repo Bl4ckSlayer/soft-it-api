@@ -82,7 +82,7 @@ const Forget = () => {
     <div>
       <div className="h-[500px] flex justify-center ">
         <div className="w-96 p-7">
-          <h2 className="text-xl text-center">Verify User</h2>
+          <h2 className="text-xl text-center">Confirmation</h2>
           <form className="flex gap-4" onSubmit={handleSubmit(handleVerify)}>
             <div className=" form-control w-full max-w-xs">
               <label className="label">

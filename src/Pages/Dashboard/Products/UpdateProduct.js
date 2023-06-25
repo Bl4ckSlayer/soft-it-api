@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const UpdateProduct = () => {
   const { allData, setAllData } = useContext(DataContext);
@@ -41,8 +42,18 @@ const UpdateProduct = () => {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .then((result) => {
+        if (result.errMgs) {
+          toast(result.errMgs);
+        } else {
+          toast(result.message);
+        }
+        console.log(result);
+      })
+      .catch((error) => {
+        toast(error);
+        console.log("error", error);
+      });
   };
   return (
     <div>
@@ -59,7 +70,6 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   {...register("category_id")}
-                  value={id}
                   placeholder="category_id"
                   className="input border-primary bg-white w-full "
                 />{" "}
@@ -190,6 +200,7 @@ const UpdateProduct = () => {
                   type="text"
                   {...register("_method")}
                   placeholder="_method"
+                  defaultValue="patch"
                   className="input border-primary bg-white w-full "
                 />{" "}
                 {errors._method && (

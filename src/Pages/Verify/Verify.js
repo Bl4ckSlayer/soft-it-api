@@ -30,17 +30,22 @@ const Verify = () => {
       .then((result) => {
         if (result.success) {
           toast(result.message);
+        } else {
+          toast.error(result.message);
         }
-        console.log(result);
+
         navigate("/login");
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        toast.error(error.message);
+        console.log("error", error);
+      });
   };
   return (
     <div>
       <div className="h-[500px] flex justify-center  ">
         <div className="w-96 p-7">
-          <h2 className="text-xl text-center">Login</h2>
+          <h2 className="text-xl text-center">Verify</h2>
           <form onSubmit={handleSubmit(handleVerify)}>
             <div className="form-control w-full max-w-xs">
               <label className="label">

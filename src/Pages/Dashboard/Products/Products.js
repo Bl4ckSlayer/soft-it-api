@@ -42,7 +42,7 @@ const Products = () => {
     <div className="grid grid-cols-1 sm:grid-cols-3">
       {data?.length ? (
         data?.map((da) => (
-          <div className="m-12">
+          <div key={da.id} className="m-12">
             <div className="card  h-full bg-base-100 shadow-xl">
               <figure className="px-4 pt-6">
                 <img src={da.main_image.id} alt="img" />
@@ -72,7 +72,7 @@ const Products = () => {
                   <button
                     className="btn  btn-primary"
                     onClick={() => {
-                      update(da.category_id);
+                      update(da.id);
                     }}
                   >
                     Update
