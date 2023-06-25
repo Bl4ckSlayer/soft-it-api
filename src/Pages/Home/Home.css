@@ -1,0 +1,60 @@
+.banner-section .container {
+  max-width: 860px;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.banner-section .container h1:before {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.banner-content h1:before {
+  width: 25px;
+  height: 25px;
+  content: " ";
+  border: 5px solid rgba(22, 2, 95, 0.945);
+  display: inline-block;
+  position: absolute;
+  overflow: visible;
+}
+.banner-content h1 {
+  max-width: 80%;
+
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  padding: 0.3rem 1rem;
+  margin: 0 auto;
+  display: table;
+}
+.banner-content h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.banner-section .container h1:after {
+  bottom: 0;
+  right: 0;
+  border-top: 0;
+  border-left: 0;
+}
+
+.banner-content h1:after {
+  width: 25px;
+  height: 25px;
+  content: " ";
+  border: 5px solid rgba(22, 2, 95, 0.945);
+  display: inline-block;
+  position: absolute;
+  overflow: visible;
+}
+.home-banner-content {
+  z-index: 1;
+}
