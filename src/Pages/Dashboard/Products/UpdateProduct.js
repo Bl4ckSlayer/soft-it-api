@@ -128,7 +128,7 @@ const UpdateProduct = () => {
               <div className="col-span-6 sm:col-span-3">
                 <label className="label" htmlFor="first-name">
                   <span className="label-text font-bold">
-                    discount <span className="text-red-500">* </span>
+                    Image <span className="text-red-500">* </span>
                   </span>
                 </label>
                 <input
