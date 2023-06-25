@@ -12,11 +12,12 @@ const Forget = () => {
   const navigate = useNavigate();
   const [phone, setPhone] = useState("");
   const handleVerify = (data) => {
+    console.log(data);
     const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
 
     const formData = new FormData();
-    formData.append("phone", data.phone);
+    formData.append("phone", data?.phone);
 
     const requestOptions = {
       method: "POST",
@@ -41,6 +42,7 @@ const Forget = () => {
   };
 
   const handleOTP = (data) => {
+    console.log(data);
     const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
 
@@ -78,9 +80,9 @@ const Forget = () => {
   };
   return (
     <div>
-      <div className="h-[500px] flex justify-center  ">
+      <div className="h-[500px] flex justify-center ">
         <div className="w-96 p-7">
-          <h2 className="text-xl text-center">Login</h2>
+          <h2 className="text-xl text-center">Verify User</h2>
           <form className="flex gap-4" onSubmit={handleSubmit(handleVerify)}>
             <div className=" form-control w-full max-w-xs">
               <label className="label">

@@ -14,21 +14,18 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // const [data1, setData] = useState([]);
-
   const handleLogin = async (data) => {
     console.log(data);
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
     myHeaders.append("ipaddress", "103.102.15.162");
     myHeaders.append("browsername", "Google Chrome");
-    myHeaders.append("Authorization", "Token");
 
-    var formdata = new FormData();
+    const formdata = new FormData();
     formdata.append("email", data.email);
     formdata.append("password", data.password);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: formdata,
@@ -39,25 +36,18 @@ const Login = () => {
       .then((response) => response.json())
       .then((result) => {
         setAllData(result);
-        // if (result.success) {
-        navigate("/");
-        toast.success(result.message);
-
-        localStorage.setItem("token", result.token);
-
-        // }
+        if (result.success) {
+          navigate("/");
+          toast.success(result.message);
+          console.log(result);
+          localStorage.setItem("token", result.token);
+        }
       })
       .catch((error) => console.log("error", error));
   };
 
   return (
     <>
-      <div className="flex justify-center flex-col items-center mt-36">
-        <h1 className="text-blue-600 font-semibold">
-          Please Log in to see content for admin email=admin@admin.com
-        </h1>
-        <h1 className="text-blue-600 font-semibold">Password=Admin123@</h1>
-      </div>
       <div className="h-[500px] flex justify-center  ">
         <div className="w-96 p-7">
           <h2 className="text-xl text-center">Login</h2>

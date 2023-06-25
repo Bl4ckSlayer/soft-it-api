@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Verify = () => {
@@ -10,17 +11,17 @@ const Verify = () => {
   } = useForm();
   const navigate = useNavigate();
   const handleVerify = (data) => {
+    console.log(data);
     const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
-
-    const formdata = new FormData();
-    formdata.append("phone", data.phone);
-    formdata.append("otp", data.otp);
+    const formData = new FormData();
+    formData.append("phone", data.phone);
+    formData.append("otp", data.otp);
 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: formdata,
+      body: formData,
       redirect: "follow",
     };
 
@@ -28,9 +29,10 @@ const Verify = () => {
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
-          navigate("/login");
+          toast(result.message);
         }
         console.log(result);
+        navigate("/login");
       })
       .catch((error) => console.log("error", error));
   };

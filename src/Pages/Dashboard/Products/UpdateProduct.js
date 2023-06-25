@@ -14,13 +14,12 @@ const UpdateProduct = () => {
   } = useForm();
 
   const updatePro = (data) => {
-    console.log(data, data.main_image[0]);
+    console.log(data);
     const myHeaders = new Headers();
-    myHeaders.append("shop-id", id);
+    myHeaders.append("shop-id", allData?.data.shop_id);
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
     myHeaders.append("authorization", allData?.token);
     const formdata = new FormData();
-
     formdata.append("category_id", data.category_id);
     formdata.append("product_name", data.product_name);
     formdata.append("price", data.price);
@@ -39,12 +38,10 @@ const UpdateProduct = () => {
 
     fetch(
       "https://dev.funnelliner.com/api/v1/client/products/7",
-      { mode: "cors" },
-
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(result, formdata))
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
   return (
@@ -62,6 +59,7 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   {...register("category_id")}
+                  value={id}
                   placeholder="category_id"
                   className="input border-primary bg-white w-full "
                 />{" "}

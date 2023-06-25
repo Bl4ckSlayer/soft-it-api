@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import DataContext from "../../../context/DataContext";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const CreateProducts = () => {
   const { allData, setAllData } = useContext(DataContext);
@@ -12,10 +13,10 @@ const CreateProducts = () => {
   } = useForm();
   const createPro = (data) => {
     console.log(data);
-    var myHeaders = new Headers();
-    myHeaders.append("shop-id", "740894");
+    const myHeaders = new Headers();
+    myHeaders.append("shop-id", allData?.data.shop_id);
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
-    myHeaders.append("id", "40");
+    myHeaders.append("id", allData?.data.id);
     myHeaders.append("authorization", allData?.token);
     const formdata = new FormData();
     formdata.append("category_name", data.category_name);
@@ -26,24 +27,31 @@ const CreateProducts = () => {
     formdata.append("product_code", data.product_code);
     formdata.append("product_qty", parseInt(data.product_qty));
     formdata.append("status", parseInt(data.status));
+    formdata.append("short_description", data?.short_description);
     formdata.append("delivery_charge", "free");
     console.log(formdata);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: formdata,
       redirect: "follow",
     };
     console.log(formdata);
-    fetch(
-      "https://dev.funnelliner.com/api/v1/client/products",
-
-      requestOptions
-    )
+    fetch("https://dev.funnelliner.com/api/v1/client/products", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result, formdata))
-      .catch((error) => console.log("error", error));
+      .then((result) => {
+        console.log(result);
+        if (result.success) {
+          toast.success(result.message);
+          console.log(result);
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+        toast(error);
+      });
   };
   return (
     <div>
@@ -175,6 +183,24 @@ const CreateProducts = () => {
                 {errors.product_qty && (
                   <p className="  text-red-600 font-semibold mt-4 text-start">
                     {errors.product_qty?.message}
+                  </p>
+                )}
+              </div>
+              <div className="col-span-6 sm:col-span-3">
+                <label className="label" htmlFor=" short_description">
+                  <span className="label-text font-bold">
+                    short_description <span className="text-red-500">* </span>
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  {...register("short_description")}
+                  placeholder="short_description"
+                  className="input border-primary bg-white w-full "
+                />{" "}
+                {errors.short_description && (
+                  <p className="  text-red-600 font-semibold mt-4 text-start">
+                    {errors.short_description?.message}
                   </p>
                 )}
               </div>

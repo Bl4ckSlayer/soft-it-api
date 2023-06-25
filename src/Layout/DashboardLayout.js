@@ -10,30 +10,8 @@ import ProductContext from "../context/ProductContext";
 const DashboardLayout = () => {
   // const { user } =
   const isAdmin = true;
-  const { data, setData } = useContext(ProductContext);
 
-  const { allData, setAllData } = useContext(DataContext);
-  console.log(allData);
-  const products = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("shop-id", allData?.data?.shop_id);
-    myHeaders.append("X-Requested-With", "XMLHttpRequest");
-    myHeaders.append("id", allData?.data?.id);
-    myHeaders.append("authorization", allData?.token);
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch("https://dev.funnelliner.com/api/v1/client/products", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result.data);
-        setData(result.data);
-      })
-      .catch((error) => console.log("error", error));
-  };
+  const products = () => {};
   return (
     <div>
       <Navbar className="z-50"></Navbar>
@@ -72,8 +50,8 @@ const DashboardLayout = () => {
 
             {isAdmin && (
               <>
-                <li className="p-2">
-                  <NavLink to="/dashboard/products" onClick={() => products()}>
+                <li className="p-2" onClick={() => products()}>
+                  <NavLink to="/dashboard/products">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

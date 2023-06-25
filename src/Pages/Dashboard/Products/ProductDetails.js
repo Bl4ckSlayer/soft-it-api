@@ -6,23 +6,23 @@ import ProductContext from "../../../context/ProductContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const { data, setData } = useContext(ProductContext);
-  const { allData, setAllData } = useContext(DataContext);
-  console.log(allData, product, data);
-  useEffect(() => {
-    var myHeaders = new Headers();
 
+  const { allData } = useContext(DataContext);
+
+  useEffect(() => {
+    const myHeaders = new Headers();
+    myHeaders.append("shop-id", allData?.data?.shop_id);
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
     myHeaders.append("authorization", allData?.token);
-    myHeaders.append("shop-id", id);
-    var requestOptions = {
+
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     };
 
     fetch(
-      `https://dev.funnelliner.com/api/v1/client/products/4`,
+      ` https://dev.funnelliner.com/api/v1/client/products/${id}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -31,7 +31,7 @@ const ProductDetails = () => {
         console.log(result);
       })
       .catch((error) => console.log("error", error));
-  }, []);
+  }, [id]);
 
   console.log(id);
 

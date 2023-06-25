@@ -15,17 +15,18 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    var myHeaders = new Headers();
+
+    const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
     myHeaders.append("ipaddress", "103.102.15.162");
     myHeaders.append("browsername", "Google Chrome");
     myHeaders.append("id", allData?.data?.id);
     myHeaders.append("authorization", allData?.token);
 
-    var formdata = new FormData();
+    const formdata = new FormData();
     formdata.append("email", allData?.data?.email);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
 
@@ -37,7 +38,8 @@ const Navbar = () => {
       .then((result) => {
         console.log(result);
         toast.success(result.message);
-        setAllData({});
+        setAllData("");
+        navigate("/");
       })
       .catch((error) => console.log("error", error));
   };

@@ -12,15 +12,16 @@ const Update = () => {
   } = useForm();
   const navigate = useNavigate();
   const handleUpdate = (data) => {
-    var myHeaders = new Headers();
+    console.log(data);
+    const myHeaders = new Headers();
     myHeaders.append("X-Requested-With", "XMLHttpRequest");
 
-    var formdata = new FormData();
+    const formdata = new FormData();
     formdata.append("phone", data.phone);
     formdata.append("password", data.password);
     formdata.append("password_confirmation", data.password_confirmation);
 
-    var requestOptions = {
+    const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: formdata,
@@ -45,7 +46,7 @@ const Update = () => {
     <div>
       <div className="h-[500px] flex justify-center  ">
         <div className="w-96 p-7">
-          <h2 className="text-xl text-center">Login</h2>
+          <h2 className="text-xl text-center">Reset Password</h2>
           <form className="" onSubmit={handleSubmit(handleUpdate)}>
             <div className=" form-control w-full max-w-xs">
               <label className="label">
